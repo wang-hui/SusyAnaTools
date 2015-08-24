@@ -448,14 +448,14 @@ namespace topTagger{
                bool givepass = false;
                const double m23 = tmpFinalSubStrucMass[0];
                const double m123 = fatJetMass;
-               if (m23 > 70 && m23 < 110 )
+               if (m23 > lowWjetMass_ && m23 < highWjetMass_ )
                {
                  if( m23/m123 > Rmin_ && m23/m123 < Rmax_ ){
                    passCriteria = 1;
                    givepass = true;
                  }
                }
-               if ( recoJetsBtagCSVS[ perCombfatJets[0]] > CSVS_ && m23 > 20 && m23 <= 170)
+               if ( recoJetsBtagCSVS[ perCombfatJets[0]] > CSVS_ && m23 > lowBhadjetMass_ && m23 <= highBhadjetMass_)
                {
                    passCriteria = 1;
                    givepass = true;
@@ -622,7 +622,7 @@ namespace topTagger{
             for(unsigned int ij=0; ij<oriJetsVec.size(); ij++){
                TLorentzVector perBhadjetLVec = forJetMassLVec[ij];
                if( perBhadjetLVec.M() <= highBhadjetMass_ && perBhadjetLVec.M() >= lowBhadjetMass_ 
-                   && recoJetsBtagCSVS[ij] > CSVS_ && fabs(perBhadjetLVec.Eta()) < 2.4) {
+                   && recoJetsBtagCSVS[ij] > CSVS_ && fabs(perBhadjetLVec.Eta()) < maxEtaForbJets_) {
                   tmpBhadjetIdx.push_back(ij);
                }else{
                   tmpRemainIdx.push_back(ij);
