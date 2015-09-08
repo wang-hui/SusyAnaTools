@@ -2143,7 +2143,7 @@ namespace topTagger{
          void setdoTopVeto( const bool doTopVeto ){
             doTopVetoSel_ = doTopVeto; 
             if( doTopVetoSel_ ){
-               //std::cout<<"\n\nINFO ... working on top veto case... NOTE that conditions in checkTopCriteria is altered in this case!"<<std::endl<<std::endl;
+               std::cout<<"\n\nINFO ... working on top veto case... NOTE that conditions in checkTopCriteria is altered in this case!"<<std::endl<<std::endl;
             }
          }
 
