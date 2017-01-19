@@ -49,6 +49,8 @@ namespace AnaSamples
         std::string DATAloc     = "Stop_production/Spring16_80X_Nov_2016_Ntp_v11X_new_IDs/";
         std::string sigMCloc    = "Stop_production/Spring16_80X_Nov_2016_Ntp_v11X_new_IDs/";
         std::string addSigMCloc = "Spring15_74X_v5X_top_corridor/";
+	//Andres
+	std::string anazario = "anazario/";
 
         if(fDir.compare("condor") == 0)
         {
@@ -70,6 +72,11 @@ namespace AnaSamples
         // 0.00143 * kt
 //        addSample("TTbar_HT-2500toInf", fDir_ + MCloc + "TTJets_HT-2500toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt",  "stopTreeMaker/AUX", 0.002368413, lumi, 523618,  1.0, kGreen);
     
+        //Andres Photons
+	addSample("GJets_HT-200To400", fDir_ + anazario + "Spring16_80X_Jul_2016_Ntp_v8p0_new_JEC_new_muonID_top_up_FINAL_GJets_HT-200To400.txt",    "stopTreeMaker/AUX", 2300, lumi, 10296521, 1.0, kGreen);
+        addSample("GJets_HT-400To600", fDir_ + anazario + "Spring16_80X_Jul_2016_Ntp_v8p0_new_JEC_new_muonID_top_up_FINAL_GJets_HT-400To600.txt",    "stopTreeMaker/AUX", 277.4, lumi, 2528414, 1.0, kGreen);
+        addSample("GJets_HT-600ToInf", fDir_ + anazario + "Spring16_80X_Jul_2016_Ntp_v8p0_new_JEC_new_muonID_top_up_FINAL_GJets_HT-600ToInf.txt",    "stopTreeMaker/AUX", 93.38, lumi, 2459255, 1.0, kGreen);
+
         // Calculated from PDG BRs'. Not from the kt * xSec in McM
         addSample("TTbarInc",           fDir_ + MCloc + "TTJets_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt",             "stopTreeMaker/AUX", 831.76,         lumi, 10259872, 1.0, kGreen);
         addSample("TTbarDiLep",         fDir_ + MCloc + "TTJets_DiLept_TuneCUETP8M1_13TeV-madgraphMLM-pythia8.txt",             "stopTreeMaker/AUX", 831.76*TTbar_DiLept_BR,         lumi, 30682233, 1.0, kGreen);
@@ -231,6 +238,9 @@ namespace AnaSamples
 
     SampleCollection::SampleCollection(SampleSet& samples)
     {
+        //Photon sample set Andres 
+        addSampleSet(samples, "GJets", {"GJets_HT-200To400", "GJets_HT-400To600", "GJets_HT-600ToInf"});
+
         //Define sets of samples for later use
         addSampleSet(samples, "TTbar", {"TTbarInc"});
         addSampleSet(samples, "TTbarSingleLep", {"TTbarSingleLepT", "TTbarSingleLepTbar"});
