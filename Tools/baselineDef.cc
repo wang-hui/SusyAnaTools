@@ -349,6 +349,9 @@ void BaselineVessel::PassBaseline()
   std::vector<double> * dPhiVec = new std::vector<double>();
   (*dPhiVec) = AnaFunctions::calcDPhi(tr->getVec<TLorentzVector>(jetVecLabel), metLVec.Phi(), 3, AnaConsts::dphiArr);
 
+  std::vector<double> * dPhiVec_ak8 = new std::vector<double>();
+  (*dPhiVec_ak8) = AnaFunctions::calcDPhi(tr->getVec<TLorentzVector>(jetVecLabelAK8), metLVec.Phi(), 3, AnaConsts::dphiArr);
+
   // Pass lepton veto?
   bool passMuonVeto = (nMuons == AnaConsts::nMuonsSel), passEleVeto = (nElectrons == AnaConsts::nElectronsSel), passIsoTrkVeto = (nIsoTrks == AnaConsts::nIsoTrksSel);
   bool passIsoLepTrkVeto = (nIsoLepTrks == AnaConsts::nIsoTrksSel), passIsoPionTrkVeto = (nIsoPionTrks == AnaConsts::nIsoTrksSel);
@@ -423,6 +426,7 @@ void BaselineVessel::PassBaseline()
   tr->registerDerivedVar("cntNJetsPt30Eta24" + firstSpec, cntNJetsPt30Eta24);
 
   tr->registerDerivedVec("dPhiVec" + firstSpec, dPhiVec);
+  tr->registerDerivedVec("dPhiVec_ak8" + firstSpec, dPhiVec_ak8);
 
   tr->registerDerivedVar("cntCSVS" + firstSpec, cntCSVS);
 
