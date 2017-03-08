@@ -213,6 +213,7 @@ bool BaselineVessel::PredefineSpec()
     doMuonVeto  = false;
     doEleVeto   = false;
     doIsoTrksVeto = false;
+    UseLepCleanJet= true;
     if(spec.compare("Zinv1b") == 0)
     {
       CSVVecLabel = "cleanJetpt30ArrBTag1fake";
