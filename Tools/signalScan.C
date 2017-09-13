@@ -1226,23 +1226,44 @@ public:
           cutFlow_->Fill("nbLE2_ntEQ1", weight * (cntCSVS >=2 && nTopCandSortedCnt ==1));
           cutFlow_->Fill("nbLE2_ntLE2", weight * (cntCSVS >=2 && nTopCandSortedCnt >=2));
 
+          cutFlow_->Fill("nbEQ1_ntEQ2", weight * (cntCSVS ==1 && nTopCandSortedCnt ==2));
+          cutFlow_->Fill("nbEQ1_ntLE3", weight * (cntCSVS ==1 && nTopCandSortedCnt >=3));
+          cutFlow_->Fill("nbEQ2_ntEQ1", weight * (cntCSVS ==2 && nTopCandSortedCnt ==1));
+          cutFlow_->Fill("nbEQ2_ntEQ2", weight * (cntCSVS ==2 && nTopCandSortedCnt ==2));
+          cutFlow_->Fill("nbEQ2_ntLE3", weight * (cntCSVS ==2 && nTopCandSortedCnt >=3));
+
+          cutFlow_->Fill("nbLE3_ntEQ1", weight * (cntCSVS >=3 && nTopCandSortedCnt ==1));
+          cutFlow_->Fill("nbLE3_ntEQ2", weight * (cntCSVS >=3 && nTopCandSortedCnt ==2));
+          cutFlow_->Fill("nbLE3_ntLE3", weight * (cntCSVS >=3 && nTopCandSortedCnt >=3));
+
           cutFlow_->Fill("MT2_200-300", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300));
           cutFlow_->Fill("MT2_300-400", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400));
-          cutFlow_->Fill("MT2_400-inf", weight * (best_had_brJet_MT2 >= 400));
+          cutFlow_->Fill("MT2_400-550", weight * (best_had_brJet_MT2 >= 400 && best_had_brJet_MT2 < 550));
+          cutFlow_->Fill("MT2_550-inf", weight * (best_had_brJet_MT2 >= 550));
 
-          cutFlow_->Fill("MT2_200-300_MET_200_275", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 200 && met < 275));
-          cutFlow_->Fill("MT2_200-300_MET_275_350", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 275 && met < 350));
-          cutFlow_->Fill("MT2_200-300_MET_350_450", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 350 && met < 450));
-          cutFlow_->Fill("MT2_200-300_MET_450_inf", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 450));
+          cutFlow_->Fill("MT2_200-300_MET_250_400", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 250 && met < 400));
+          cutFlow_->Fill("MT2_200-300_MET_400_500", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 400 && met < 500));
+          cutFlow_->Fill("MT2_200-300_MET_500_600", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 500 && met < 600));
+          cutFlow_->Fill("MT2_200-300_MET_600_750", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 600 && met < 750));
+          cutFlow_->Fill("MT2_200-300_MET_750_inf", weight * (best_had_brJet_MT2 >= 200 && best_had_brJet_MT2 < 300 && met >= 750));
 
-          cutFlow_->Fill("MT2_300-400_MET_200_275", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 200 && met < 275));
-          cutFlow_->Fill("MT2_300-400_MET_275_350", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 275 && met < 350));
-          cutFlow_->Fill("MT2_300-400_MET_350_450", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 350 && met < 450));
-          cutFlow_->Fill("MT2_300-400_MET_450_inf", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 450));
+          cutFlow_->Fill("MT2_300-400_MET_250_400", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 250 && met < 400));
+          cutFlow_->Fill("MT2_300-400_MET_400_500", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 400 && met < 500));
+          cutFlow_->Fill("MT2_300-400_MET_500_600", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 500 && met < 600));
+          cutFlow_->Fill("MT2_300-400_MET_600_750", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 600 && met < 750));
+          cutFlow_->Fill("MT2_300-400_MET_750_inf", weight * (best_had_brJet_MT2 >= 300 && best_had_brJet_MT2 < 400 && met >= 750));
 
-          cutFlow_->Fill("MT2_400-inf_MET_200_350", weight * (best_had_brJet_MT2 >= 400 && met >= 200 && met < 350));
-          cutFlow_->Fill("MT2_400-inf_MET_350_450", weight * (best_had_brJet_MT2 >= 400 && met >= 350 && met < 450));
-          cutFlow_->Fill("MT2_400-inf_MET_450_inf", weight * (best_had_brJet_MT2 >= 400 && met >= 450));
+          cutFlow_->Fill("MT2_400-550_MET_250_400", weight * (best_had_brJet_MT2 >= 400 && best_had_brJet_MT2 < 550 && met >= 250 && met < 400));
+          cutFlow_->Fill("MT2_400-550_MET_400_500", weight * (best_had_brJet_MT2 >= 400 && best_had_brJet_MT2 < 550 && met >= 400 && met < 500));
+          cutFlow_->Fill("MT2_400-550_MET_500_600", weight * (best_had_brJet_MT2 >= 400 && best_had_brJet_MT2 < 550 && met >= 500 && met < 600));
+          cutFlow_->Fill("MT2_400-550_MET_600_750", weight * (best_had_brJet_MT2 >= 400 && best_had_brJet_MT2 < 550 && met >= 600 && met < 750));
+          cutFlow_->Fill("MT2_400-550_MET_750_inf", weight * (best_had_brJet_MT2 >= 400 && best_had_brJet_MT2 < 550 && met >= 750));
+
+          cutFlow_->Fill("MT2_550-inf_MET_250_400", weight * (best_had_brJet_MT2 >= 550 && met >= 250 && met < 400));
+          cutFlow_->Fill("MT2_550-inf_MET_400_500", weight * (best_had_brJet_MT2 >= 550 && met >= 400 && met < 500));
+          cutFlow_->Fill("MT2_550-inf_MET_500_600", weight * (best_had_brJet_MT2 >= 550 && met >= 500 && met < 600));
+          cutFlow_->Fill("MT2_550-inf_MET_600_750", weight * (best_had_brJet_MT2 >= 550 && met >= 600 && met < 750));
+          cutFlow_->Fill("MT2_550-inf_MET_750_inf", weight * (best_had_brJet_MT2 >= 550 && met >= 750));
 
           baseline_met_->Fill(met, weight);
           baseline_mt2_->Fill(best_had_brJet_MT2, weight);

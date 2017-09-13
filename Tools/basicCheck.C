@@ -1080,17 +1080,17 @@ void basicCheck(int argc, char *argv[]){
       tdrStyle->SetPaintTextFormat("2.0f");
 
       TCanvas *c1 = new TCanvas("c1", "c1", 800, 800); 
-      c1->SetBottomMargin(0.145); c1->SetLeftMargin(0.170); c1->SetTopMargin(0.110); c1->SetRightMargin(0.1);
+      c1->SetBottomMargin(0.145); c1->SetLeftMargin(0.180); c1->SetTopMargin(0.110); c1->SetRightMargin(0.05);
       char names[200], dispt[200];
       for(int iSR=0; iSR<nSR; iSR++){
          h2_poly_MT2_vs_metVec[iSR].back()->ClearBinContents();
          int ib = nbJets_SR_lo[iSR], it = nTops_SR_lo[iSR];
          if( ib >=3 || it >=3 ){
 //            sprintf(dispt, "                 N_{b}%s & N_{t}%s; #slash{E}_{T} (GeV); H_{T} (GeV)", disStr_nbJets_SR[iSR].c_str(), disStr_nTops_SR[iSR].c_str());
-            sprintf(dispt, "                 N_{b}%s & N_{t}%s; E_{T}^{miss} (GeV); H_{T} (GeV)", disStr_nbJets_SR[iSR].c_str(), disStr_nTops_SR[iSR].c_str());
+            sprintf(dispt, "                 N_{b}%s & N_{t}%s; p_{T}^{miss} (GeV); H_{T} (GeV)", disStr_nbJets_SR[iSR].c_str(), disStr_nTops_SR[iSR].c_str());
          }else{
 //            sprintf(dispt, "                 N_{b}%s & N_{t}%s; #slash{E}_{T} (GeV); M_{T2} (GeV)", disStr_nbJets_SR[iSR].c_str(), disStr_nTops_SR[iSR].c_str());
-            sprintf(dispt, "                 N_{b}%s & N_{t}%s; E_{T}^{miss} (GeV); M_{T2} (GeV)", disStr_nbJets_SR[iSR].c_str(), disStr_nTops_SR[iSR].c_str());
+            sprintf(dispt, "                 N_{b}%s & N_{t}%s; p_{T}^{miss} (GeV); M_{T2} (GeV)", disStr_nbJets_SR[iSR].c_str(), disStr_nTops_SR[iSR].c_str());
          }
 /*
          if( ib == 1 && it ==1 ) h2_poly_MT2_vs_metVec[iSR].back()->GetYaxis()->SetRangeUser(200, 900);
@@ -1138,12 +1138,14 @@ void basicCheck(int argc, char *argv[]){
          h2_poly_MT2_vs_metVec[iSR].back()->GetXaxis()->SetTitleSize(h2_poly_MT2_vs_metVec[iSR].back()->GetXaxis()->GetTitleSize()*1.8);
          h2_poly_MT2_vs_metVec[iSR].back()->GetYaxis()->SetTitleSize(h2_poly_MT2_vs_metVec[iSR].back()->GetYaxis()->GetTitleSize()*1.8);
          h2_poly_MT2_vs_metVec[iSR].back()->GetXaxis()->SetTitleOffset(0.9);
-         h2_poly_MT2_vs_metVec[iSR].back()->GetYaxis()->SetTitleOffset(1.30);
+         h2_poly_MT2_vs_metVec[iSR].back()->GetYaxis()->SetTitleOffset(1.35);
          h2_poly_MT2_vs_metVec[iSR].back()->SetMarkerSize(h2_poly_MT2_vs_metVec[iSR].back()->GetMarkerSize()*1.5);
          h2_poly_MT2_vs_metVec[iSR].back()->SetStats(0);
          h2_poly_MT2_vs_metVec[iSR].back()->Draw("text");
          char tmpStr[200];
          sprintf(tmpStr, "basicCheck_poly_MT2_vs_met_%s_%d.pdf", nameStr.c_str(), iSR); 
+         c1->Print(tmpStr);
+         sprintf(tmpStr, "basicCheck_poly_MT2_vs_met_%s_%d.C", nameStr.c_str(), iSR); 
          c1->Print(tmpStr);
       }
    }

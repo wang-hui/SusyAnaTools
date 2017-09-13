@@ -54,9 +54,9 @@ TStopwatch timer;
 const double ymax_Yields = 500.;
 const double ymin_Yields = 0.05;
 
-int nXbins = 35, nYbins = 22;
-double loX =  87.5, hiX = 962.5;
-double loY = -12.5, hiY = 537.5;
+int nXbins = 42, nYbins = 32;
+double loX = 150.0, hiX = 1200.0;
+double loY = 0.0, hiY = 800.0;
 
 void drawOverFlowBin(TH1 *histToAdjust){
    int nbins = histToAdjust->GetXaxis()->GetNbins();
@@ -102,10 +102,14 @@ void makeSignalCards(const std::string inputRootName, const std::string inputRoo
 
    std::cout<<"\nsampleKeyStr : "<<sampleKeyStr.c_str()<<std::endl<<std::endl;
 
-   if( sampleKeyStr == "T1tttt" || sampleKeyStr == "T5ttcc" || sampleKeyStr == "T5tttt_degen" || sampleKeyStr == "T5tttt_dM175" || sampleKeyStr == "T1ttbb"){
-      nXbins = 52; nYbins = 49;
-      loX = 612.5; hiX = 1912.5;
-      loY = -12.5; hiY = 1212.5;
+   if( sampleKeyStr == "T1tttt" || sampleKeyStr == "T5ttcc" || sampleKeyStr == "T5tttt_degen" || sampleKeyStr == "T1ttbb"){
+      nXbins = 64; nYbins = 76;
+      loX = 600.0; hiX = 2200.0;
+      loY =   0.0; hiY = 1900.0;
+   }else if( sampleKeyStr == "T5tttt_dM175" ){
+      nXbins = 56; nYbins = 76;
+      loX = 800.0; hiX = 2200.0;
+      loY =   0.0; hiY = 1900.0;
    }
 
    if( !inputRootName_hadtau_cont.empty() || !inputRootName_lostle_cont.empty() ){
@@ -158,6 +162,18 @@ void makeSignalCards(const std::string inputRootName, const std::string inputRoo
    TH2D * h2_mistaggenTopSF_baseline = new TH2D("mistaggenTopSF_baseline", "mistaggenTopSF after baseline cuts", nXbins, loX, hiX, nYbins, loY, hiY);
 
    TH2D * h2_contam_baseline = new TH2D("contam_baseline", "contam after baseline cuts", nXbins, loX, hiX, nYbins, loY, hiY);
+
+   std::vector<TH2D*> accVec;
+   for(int ib=0; ib<nTotBins; ib++){
+      char binStr[20], ordStr[20];
+      sprintf(binStr, "%d", ib);
+      sprintf(ordStr, "th");
+      if(ib%10 == 1 && ib != 11) sprintf(ordStr, "st"); 
+      if(ib%10 == 2 && ib != 12) sprintf(ordStr, "nd"); 
+      if(ib%10 == 3 && ib != 13) sprintf(ordStr, "rd"); 
+      accVec.emplace_back(new TH2D("acc_bin"+TString(binStr), "Acceptance for the "+TString(binStr)+TString(ordStr)+" Search Bin", nXbins, loX, hiX, nYbins, loY, hiY));
+   }
+   TH2D * h2_acc_no_wt_baseline = new TH2D("acc_no_wt_baseline", "Acceptance for the baseline cuts", nXbins, loX, hiX, nYbins, loY, hiY);
 
    while ( (key = (TKey*)nextkey())) {
 
@@ -350,9 +366,10 @@ void makeSignalCards(const std::string inputRootName, const std::string inputRoo
 
       double sum_scaleUncUp = 0, sum_scaleUncDn = 0;
       double sum_pdfUncUp = 0, sum_pdfUncCen = 0, sum_pdfUncDn = 0;
-      double sum_cent = 0;
+      double sum_cent = 0, sum_err =0;
       for(int ib=0; ib<nBins; ib++){
          double cent = h1_nSearchBin->GetBinContent(ib+1); sum_cent += cent;
+         double err = h1_nSearchBin->GetBinError(ib+1); sum_err += err*err;
 
          double pdfUncUp_cent = h1_pdfUncUp->GetBinContent(ib+1); sum_pdfUncUp += pdfUncUp_cent;
          double pdfUncCen_cent = h1_pdfUncCen->GetBinContent(ib+1); sum_pdfUncCen += pdfUncCen_cent;
@@ -361,6 +378,7 @@ void makeSignalCards(const std::string inputRootName, const std::string inputRoo
          double scaleUncUp_cent = h1_scaleUncUp->GetBinContent(ib+1); sum_scaleUncUp += scaleUncUp_cent;
          double scaleUncDn_cent = h1_scaleUncDn->GetBinContent(ib+1); sum_scaleUncDn += scaleUncDn_cent;
       }
+      sum_err = sqrt(sum_err);
 
       double sum_cent_wt = 0, sum_err_wt =0;
       double stat_ACCwt = 0, bTagSF_ACCwt = 0, mistagSF_ACCwt =0, pdfUnc_ACCwt = 0, scaleUnc_ACCwt = 0, isrUnc_ACCwt = 0, metMag_ACCwt = 0, jetJEC_ACCwt = 0, lepVetoUnc_ACCwt = 0, genTopSF_ACCwt = 0, mistaggenTopSF_ACCwt = 0, recoTopSF_ACCwt = 0;
@@ -380,6 +398,13 @@ void makeSignalCards(const std::string inputRootName, const std::string inputRoo
          double err = h1_nSearchBin->GetBinError(ib+1);
          double rel_err = 0; if( cent!=0 ) rel_err = err/cent;
          rateVec[ib] = cent; statUncVec[ib] = rel_err; systUncVec[ib] = 0.2;
+
+         int tmp_binXidx = accVec[ib]->GetXaxis()->FindBin(double(mStop));
+         int tmp_binYidx = accVec[ib]->GetYaxis()->FindBin(double(mLSP));
+
+         accVec[ib]->SetBinContent(tmp_binXidx, tmp_binYidx, cent/totEntries);
+         double tmp_acc_err = cent ==0? 0 : cent/totEntries*sqrt(1/cent - 1/totEntries);
+         accVec[ib]->SetBinError(tmp_binXidx, tmp_binYidx, tmp_acc_err);
 
          double trigUncCen_cent = h1_trigUncCen->GetBinContent(ib+1);
          double trigUncCen_scale = cent !=0 ? trigUncCen_cent/cent : 1.0;
@@ -532,15 +557,15 @@ void makeSignalCards(const std::string inputRootName, const std::string inputRoo
          if( h1_eleCS ){
             eleCont_cent = h1_eleCS->GetBinContent(ib+1) * fin_TF_to_ele[ib];
          }
-//         totCont_cent = 0.5*(muCont_cent + eleCont_cent);
-         totCont_cent = muCont_cent < eleCont_cent? muCont_cent : eleCont_cent;
+         totCont_cent = 0.5*(muCont_cent + eleCont_cent);
+//         totCont_cent = muCont_cent < eleCont_cent? muCont_cent : eleCont_cent;
          if( totCont_cent == 0 ) totCont_cent = 0.5*(muCont_cent + eleCont_cent);
 
          double totCont_rel = cent!=0 ? totCont_cent/cent : 0;
          if( totCont_rel >= 1.0 || (cent == 0 && totCont_cent !=0) ){
             std::cout<<"v_mStop : "<<v_mStop<<"  v_mLSP : "<<v_mLSP<<"  ib : "<<ib<<"  rate : "<<cent<<"  totCont_cent : "<<totCont_cent<<std::endl;
             totCont_rel = 1.0;
-            totCont_cent = cent;
+//            totCont_cent = cent;
          }
          totContVec[ib] = totCont_cent;
 
@@ -645,6 +670,8 @@ void makeSignalCards(const std::string inputRootName, const std::string inputRoo
 
       contam_ACCwt /= perSig_acc_wt;
 
+      double perSig_acc = sum_cent/totEntries;
+
       printf("signal_%d_%d (xSec : %5.3e +- %4.1f%) :   acc_wt : %4.2e  stat : %5.3f  bTagSF : %5.3f  mistagSF : %5.3f  pdfUnc : %5.3f  scaleUnc : %5.3f  isrUnc : %5.3f  metMag : %5.3f  jetJEC : %5.3f  lepVetoUnc : %5.3f  genTopSF : %5.3f  recoTopSF : %5.3f  mistaggenTopSF : %5.3f  ->  syst : %5.3f  ->  contam : %5.3f\n", mStop, mLSP, xSec, xSecErr/xSec*100, perSig_acc_wt, stat_ACCwt, bTagSF_ACCwt, mistagSF_ACCwt, pdfUnc_ACCwt, scaleUnc_ACCwt, isrUnc_ACCwt, metMag_ACCwt, jetJEC_ACCwt, lepVetoUnc_ACCwt, genTopSF_ACCwt, recoTopSF_ACCwt, mistaggenTopSF_ACCwt, syst_ACCwt, contam_ACCwt);
 
       int binXidx = h2_acc_baseline->GetXaxis()->FindBin(double(mStop));
@@ -667,6 +694,8 @@ void makeSignalCards(const std::string inputRootName, const std::string inputRoo
       h2_mistaggenTopSF_baseline->SetBinContent(binXidx, binYidx, mistaggenTopSF_ACCwt*100);
 
       h2_contam_baseline->SetBinContent(binXidx, binYidx, contam_ACCwt*100);
+
+      h2_acc_no_wt_baseline->SetBinContent(binXidx, binYidx, perSig_acc);
 
       sprintf(tmpStr, "signal_%d_%d.txt", mStop, mLSP);
       std::ofstream ofs;

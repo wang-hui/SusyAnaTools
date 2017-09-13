@@ -34,6 +34,7 @@
 #include "xSec.h"
 
 bool do37Bins = false;
+bool forPaper = true;
 
 SearchBins * sb =0;
 int nTotBins;
@@ -86,7 +87,7 @@ void drawOverFlowBin(TH1 *histToAdjust){
 
 std::vector<std::string> todraw_h1_keyStrVec = {"nJets", "nbJets", "nTops", "met", "metphi", "HT", "MT2", "vtxSize", "allJetPt", "allJetM", "leadJetPt", "leadJetM", "topMass", "muPt", "dphi1", "dphi2", "dphi3", "cutFlow", "searchBinYields"};
 std::vector<int>         todraw_h1_rebinVec  = {      1,        1,       1,    5,       10,     5,     5,         1,          5,         5,           5,          5,         5,      5,      10,      10,      10,        1,                  1};
-std::vector<std::string> todraw_h1_xLabelVec = {"N_{jets}", "N_{b}", "N_{t}", "#slash{E}_{T} (GeV)", "#phi_{E_{T}^{miss}}", "H_{T} (GeV)", "M_{T2} (GeV)", "N_{vtx}", "P_{T}(all jets) (GeV)", "M(all jets) (GeV)", "P_{T}(lead jet) (GeV)", "M(lead jet) (GeV)", "M(top) (GeV)", "P_{T}(#mu)", "#Delta#phi(j_{1}, E_{T}^{miss})", "#Delta#phi(j_{2}, E_{T}^{miss})", "#Delta#phi(j_{3}, E_{T}^{miss})", "cutFlow", "idx(searchBin)"};
+std::vector<std::string> todraw_h1_xLabelVec = {"N_{jets}", "N_{b}", "N_{t}", "#slash{E}_{T} (GeV)", "#phi_{p_{T}^{miss}}", "H_{T} (GeV)", "M_{T2} (GeV)", "N_{vtx}", "p_{T}(all jets) (GeV)", "M(all jets) (GeV)", "p_{T}(lead jet) (GeV)", "M(lead jet) (GeV)", "M(top) (GeV)", "p_{T}(#mu)", "#Delta#phi(j_{1}, p_{T}^{miss})", "#Delta#phi(j_{2}, p_{T}^{miss})", "#Delta#phi(j_{3}, p_{T}^{miss})", "cutFlow", "idx(searchBin)"};
 
 std::vector<std::vector<TH1D*> > cached_h1Vec(todraw_h1_keyStrVec.size());
 std::vector<std::string> cached_sampleStrVec;
@@ -98,7 +99,7 @@ std::vector<int>         sel_fastsim_momMassVec = {300, 350, 350, 500, 600, 650,
 std::vector<int>         sel_fastsim_dauMassVec = {225, 150, 175, 325, 200, 250,   0, 300,  50};
 std::vector<int>         sel_fastsim_color_sampleKeyVec = {kRed, kBlue, kGreen+4, kMagenta, kTeal+4, kYellow-7};
 std::vector<int>         todraw_h1_fastsim_rebinVec  = {         2,                   2,             1,             1,              5,                  5,                          1};
-std::vector<std::string> todraw_h1_fastsim_xLabelVec = {"P_{T}^{gen} (GeV)", "P_{T}^{gen} (GeV)", "N_{b}", "N_{t}", "#slash{E}_{T} (GeV)", "M_{T2} (GeV)", "Search region bin number"};
+std::vector<std::string> todraw_h1_fastsim_xLabelVec = {"p_{T}^{gen} (GeV)", "p_{T}^{gen} (GeV)", "N_{b}", "N_{t}", "#slash{E}_{T} (GeV)", "M_{T2} (GeV)", "Search region bin number"};
 std::vector<std::string> todraw_h1_fastsim_keyStrVec = {"genTopPt", "baseline_genTopPt", "baseline_nb", "baseline_nt", "baseline_met", "baseline_mt2", "baseline_nSearchBin"};
 std::vector<std::vector<TH1D*> > sel_fastsim_h1Vec(todraw_h1_fastsim_keyStrVec.size());
 
@@ -276,15 +277,15 @@ void makeUnblindPlots(const std::string cutLev="baseline", const std::string dat
 
    TCanvas *ct = new TCanvas("ct", "ct", 900, 600);
 
-   Float_t legendX1 = .57;
-   Float_t legendX2 = .72;
-   Float_t legendY1 = .60;
-   Float_t legendY2 = .85;
+   Float_t legendX1 = .59;
+   Float_t legendX2 = .77;
+   Float_t legendY1 = .64;
+   Float_t legendY2 = .81;
    TLegend* catLeg1 = new TLegend(legendX1,legendY1,legendX2,legendY2);
    if( addSigPts ){ delete(catLeg1); catLeg1 = new TLegend(legendX1+0.10,legendY1+0.15,legendX2,legendY2); }
    catLeg1->SetTextSize(0.060);
 
-   legendX1 = .76;
+   legendX1 = .72;
    legendX2 = .91;
    legendY1 = .60;
    legendY2 = .85;
@@ -439,7 +440,7 @@ void makeUnblindPlots(const std::string cutLev="baseline", const std::string dat
    THStack * hs2_sum_SM = new THStack("hs2", "");
 
    // TLegend - starts
-   catLeg1->AddEntry(h1_data, "Data");
+   catLeg1->AddEntry(h1_data, "Data", "ep");
 
    h1_ttz->SetFillColor(kTeal-7); h1_ttz->SetLineColor(kTeal-7); h1_ttz->SetMarkerColor(kTeal-7);
    hs_sum_SM->Add(h1_ttz);
@@ -461,7 +462,7 @@ void makeUnblindPlots(const std::string cutLev="baseline", const std::string dat
       catLeg1->AddEntry(h1_ttbarW, "t#bar{t}/W/t");
       catLeg2->AddEntry(h1_zinv, "Z(#nu#bar{#nu})+jets");
       catLeg2->AddEntry(h1_qcd, "QCD");
-      catLeg2->AddEntry(h1_ttz, "t#bar{t}Z(#nu#bar{#nu})");
+      catLeg2->AddEntry(h1_ttz, "t#bar{t}Z(#nu#bar{#nu}) + Rare");
    }
 
    //TLegend - ends
@@ -471,7 +472,7 @@ void makeUnblindPlots(const std::string cutLev="baseline", const std::string dat
    h1_data->SetLineColor(kBlack);
 
    h1_data->GetXaxis()->SetTitle("Search region bin number");
-   h1_data->GetYaxis()->SetTitle("Events");
+   h1_data->GetYaxis()->SetTitle("Events / bin");
    h1_data->GetYaxis()->SetTitleSize(0.07);
    h1_data->GetYaxis()->SetLabelSize(0.04);
    h1_data->GetYaxis()->SetTitleOffset(0.6);
@@ -491,10 +492,10 @@ void makeUnblindPlots(const std::string cutLev="baseline", const std::string dat
          catLeg2->AddEntry(tmp_sum_SM, "Sum Bkg.");
       }
 
-      h1_data->Draw("same");
+      h1_data->Draw("same E0");
    }else{
       TH1D * tmp_data = (TH1D*) h1_data->Clone(); tmp_data->Reset();
-      tmp_data->Draw("");
+      tmp_data->Draw("E0");
       tmp_data->SetMaximum(ymax_Yields); tmp_data->SetMinimum(ymin_Yields);
 
       hs_sum_SM->Draw("hist same");
@@ -521,7 +522,8 @@ void makeUnblindPlots(const std::string cutLev="baseline", const std::string dat
    }
 
    TGraphAsymmErrors * gr_AsymErr = new TGraphAsymmErrors(xVec.size(), &xVec[0], &yVec[0], &xSysErrDnVec[0], &xSysErrUpVec[0], &ySysErrDnVec[0], &ySysErrUpVec[0]);
-   gr_AsymErr->SetFillColor(kGray+4); gr_AsymErr->SetFillStyle(3244); gr_AsymErr->SetLineWidth(1); gr_AsymErr->SetLineColor(0); //gr_AsymErr->SetMarkerSize(0); gr_AsymErr->SetMarkerColor(0);
+//   gr_AsymErr->SetFillColor(kGray+4); gr_AsymErr->SetFillStyle(3244); gr_AsymErr->SetLineWidth(1); gr_AsymErr->SetLineColor(0); //gr_AsymErr->SetMarkerSize(0); gr_AsymErr->SetMarkerColor(0);
+   gr_AsymErr->SetFillColor(kBlue+3); gr_AsymErr->SetFillStyle(3244); gr_AsymErr->SetLineWidth(1); gr_AsymErr->SetLineColor(0); //gr_AsymErr->SetMarkerSize(0); gr_AsymErr->SetMarkerColor(0);
    gr_AsymErr->Draw("2 e0");
 
    catLeg_unc->AddEntry(gr_AsymErr, "Bkg. Syst. Unc.", "F");
@@ -741,7 +743,7 @@ void makeUnblindPlots(const std::string cutLev="baseline", const std::string dat
    mark.DrawLatex(gPad->GetLeftMargin(), 1 - (gPad->GetTopMargin() - 0.017), "CMS"); // #scale[0.8]{#it{Preliminary}}");        
    mark.SetTextSize(0.042 * fontScale);
    mark.SetTextFont(52);
-   mark.DrawLatex(gPad->GetLeftMargin() + 0.09, 1 - (gPad->GetTopMargin() - 0.017), "Preliminary");
+   if( !forPaper ) mark.DrawLatex(gPad->GetLeftMargin() + 0.09, 1 - (gPad->GetTopMargin() - 0.017), "Preliminary");
    //Draw lumistamp                                                                                                                         
    mark.SetTextFont(42);
    mark.SetTextAlign(31);
@@ -830,14 +832,15 @@ void makeUnblindPlots(const std::string cutLev="baseline", const std::string dat
    if( addStatUnc ){
       TGraphAsymmErrors * gr_Ratio_Sum_AsymErr = new TGraphAsymmErrors(xVec.size(), &xVec[0], &yRatioVec[0], &xSysErrDnVec[0], &xSysErrUpVec[0], &yRatioSumErrDnVec[0], &yRatioSumErrUpVec[0]);
       gr_Ratio_Sum_AsymErr->SetFillColor(kGray+1); gr_Ratio_Sum_AsymErr->SetFillStyle(3244); gr_Ratio_Sum_AsymErr->SetLineWidth(1); gr_Ratio_Sum_AsymErr->SetLineColor(0); gr_Ratio_Sum_AsymErr->SetMarkerSize(0); gr_Ratio_Sum_AsymErr->SetMarkerColor(0);
-      gr_Ratio_Sum_AsymErr->Draw("2");
+      gr_Ratio_Sum_AsymErr->Draw("2 e0");
    }
 
    TGraphAsymmErrors * gr_Ratio_AsymErr = new TGraphAsymmErrors(xVec.size(), &xVec[0], &yRatioVec[0], &xSysErrDnVec[0], &xSysErrUpVec[0], &yRatioSysErrDnVec[0], &yRatioSysErrUpVec[0]);
-   gr_Ratio_AsymErr->SetFillColor(kGray+4); gr_Ratio_AsymErr->SetFillStyle(3244);
-   gr_Ratio_AsymErr->Draw("2");
+//   gr_Ratio_AsymErr->SetFillColor(kGray+4); gr_Ratio_AsymErr->SetFillStyle(3244);
+   gr_Ratio_AsymErr->SetFillColor(kBlue+3); gr_Ratio_AsymErr->SetFillStyle(3244);
+   gr_Ratio_AsymErr->Draw("2 e0");
    fline->Draw("same");
-   h1_ratio->Draw("E1same");
+   h1_ratio->Draw("E0same");
 
    sb->drawSBregionDef(0, ymin_Yields, false, true);
       //-----------------------------------------------------------
