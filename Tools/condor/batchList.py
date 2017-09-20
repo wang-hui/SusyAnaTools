@@ -22,7 +22,7 @@ def recSearch(path, fout = None):
             recSearch("/".join([path, endpath]), fout)
         else:
             filename = "/".join([path, l.split()[-1]])
-            if filename.endswith(".root") and not "failed" in filename:
+            if filename.endswith(".root") and "stop" in filename and not "failed" in filename:
                 if fout == None:
                     print "".join(["%s/"%eosurl, filename])
                 else:
