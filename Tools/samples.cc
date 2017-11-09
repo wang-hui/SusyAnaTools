@@ -51,6 +51,8 @@ namespace AnaSamples
         std::string sigMCloc    = "Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/";
         std::string addSigMCloc = "Spring15_74X_v5X_top_corridor/";
         std::string deepTrimmed_loc       = "Stop_production/Summer16_80X_Jan_2017_Ntp_v12X/DeepTrimmed/";
+        std::string soCali_ntuples = "/eos/uscms/store/user/mkilpatr/13TeV/261017_run2017b/merged/";
+        std::string DataTest17          ="Stop_production/2017Test/";
 
         if(fDir.compare("condor") == 0)
         {
@@ -60,6 +62,8 @@ namespace AnaSamples
             sigMCloc = "";
             addSigMCloc = "";
             deepTrimmed_loc = "";
+            DataTest17 = "";
+
         }
 
         //TTbar samples
@@ -256,6 +260,10 @@ namespace AnaSamples
 
         addSample("Data_MET_deepTrimmed", fDir_ + deepTrimmed_loc + "MET_deepTrimmed.txt", "stopTreeMaker/AUX", 35866.210733056, 1.0,  kBlack);
 
+
+        addSample("Data_MET_Run2017", fDir_ + DataTest17 + "MET.txt","stopTreeMaker/AUX", 15347.268826469, 1.0,  kBlack);
+        addSample("Data_MET_SoCali", fDir_ + DataTest17 + "merged.txt","Events", 15347.268826469, 1.0,  kBlack);
+
         // ----------
         // - signal -
         // ----------
@@ -405,6 +413,9 @@ namespace AnaSamples
         addSampleSet(samples, "Data_MET", {"Data_MET_2016"});
         addSampleSet(samples, "Data_MET_Run2016G", {"Data_MET_Run2016G"});
         addSampleSet(samples, "Data_MET_deepTrimmed", {"Data_MET_deepTrimmed"});
+
+        addSampleSet(samples, "Data_MET_Run2017", {"Data_MET_Run2017"});
+        addSampleSet(samples, "Data_MET_SoCali", {"Data_MET_SoCali"});
 
         addSampleSet(samples, "Signal_T1tttt_mGluino1200_mLSP800", {"Signal_T1tttt_mGluino1200_mLSP800"});
         addSampleSet(samples, "Signal_T1tttt_mGluino1500_mLSP100", {"Signal_T1tttt_mGluino1500_mLSP100"});

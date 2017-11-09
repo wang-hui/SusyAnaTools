@@ -32,7 +32,7 @@ OBJS := $(FILES:$(SDIR)/%.cc=$(ODIR)/%.o)
 
 PROGRAMS = tupleTest nEvts deepTrim # basicCheck makeCombPlots makeSignalHistograms signalScan makeSignalCards makeUnblindPlots batchSignalPlots bTagEfficiencyCalc ISRJetsProducer
 
-all: mkobj SusyAnaTools sampPyWrap $(PROGRAMS)
+all: mkobj SusyAnaTools sampPyWrap AliasTest $(PROGRAMS)
 
 mkobj:
 	@mkdir -p obj
@@ -101,7 +101,7 @@ ISRJetsProducer:  $(ODIR)/samples.o $(ODIR)/NTupleReader.o $(ODIR)/ISRJetsProduc
 #DataMC: $(ODIR)/baselineDef.o $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/samples.o $(ODIR)/customize.o $(ODIR)/customize.o $(ODIR)/searchBins.o $(ODIR)/DataMC.o
 #	$(LD) $^ $(LIBS) -o $@
 
-AliasTest: $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/StopleAlias.o  $(ODIR)/AliasTest.o  
+AliasTest: $(ODIR)/NTupleReader.o $(ODIR)/SATException.o $(ODIR)/StopleAlias.o $(ODIR)/samples.o  $(ODIR)/AliasTest.o  
 	$(LD) $^ $(LIBS) -o $@
 
 clean:
