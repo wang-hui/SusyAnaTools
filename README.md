@@ -13,14 +13,15 @@ git checkout NEW_TAG_NAME
 The following installation instructions assume the user wants to process Run2016 data or Spring16 MC.
 
 ```
-cmsrel CMSSW_9_2_6
-cd CMSSW_9_2_6/src/
+setenv SCRAM_ARCH slc6_amd64_gcc630
+cmsrel CMSSW_9_4_4
+cd CMSSW_9_4_4/src/
 cmsenv
 git cms-init
 git clone -b TestMiniAOD git@github.com:susy2015/recipeAUX.git
 git clone git@github.com:cms-jet/JetToolbox.git JMEAnalysis/JetToolbox -b jetToolbox_91X_v1 (https://github.com/cms-jet/JetToolbox/tree/jetToolbox_91X)
-git clone -b CMSSW926 git@github.com:susy2015/SusyAnaTools.git
-scram b -j9
+git clone -b CMSSW944 git@github.com:susy2015/SusyAnaTools.git
+scram b -j 8
 ```
 
 To produce ntuples with crab submission (google doc for production signup is https://docs.google.com/spreadsheets/d/17Hpp5S-UkiKvuugKxqbW0-3aLhiJrJP8MEEyHce_Lzw/edit#gid=0):
@@ -55,7 +56,7 @@ cd $CMSSW_BASE/src
 git clone git@github.com:susy2015/opencv.git
 cd opencv
 git checkout 3.1.0_StopBugFix
-cmake .
+cmake -DENABLE_PRECOMPILED_HEADERS=OFF ##Fixes for GCC6
 make -j 8
 
 ## Checkout Tagtagger
