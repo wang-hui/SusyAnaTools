@@ -40,6 +40,7 @@ void StopleAlias::operator()(NTupleReader& tr_)
 
   MapMET();
   MapJets();
+  MapSoftb();
 
   // Apply AliasMap only for the first event
   if (tr->isFirstEvent())
@@ -94,12 +95,18 @@ bool StopleAlias::MapJets()
 {
   // Ak4 Jets
   MapVectorTLV("ak4_jet", "jetsLVec");
-
+  MapVectorTLV("ak4_genjet", "genjetsLVec");
+  MapVectorObj<float, double>("ak4_jet_csv", "recoJetsBtag_0");
 
   // Ak8 Jets
+  MapVectorTLV("ak8_fatjet_puppi", "puppiJetsLVec");
+  MapVectorTLV("ak8_fatjet", "ak8JetsLVec", "pt", "eta", "phi", "rawmass");
+  MapVectorObj<float, double>("ak8_fatjet_puppi_sdmass", "puppisoftDropMass");
+
   addAlias("ak8_fatjet_puppi_tau1", "puppitau1");
   addAlias("ak8_fatjet_puppi_tau2", "puppitau2");
   addAlias("ak8_fatjet_puppi_tau3", "puppitau3");
+
   return true;
 }       // -----  end of function StopleAlias::MapJets  -----
 
@@ -155,9 +162,14 @@ bool StopleAlias::MapGen()
 // ===========================================================================
 bool StopleAlias::MapIsoTrack()
 {
-  MapVectorTLV("pfcand", "loose_isoTrksLVec");
-  
-
+  MapVectorTLV("prodisotrks_looseIsoTrks", "loose_isoTrksLVec");
+  addAlias("loose_isoTrks_idx"       , "prodisotrks_looseIsoTrks_idx");
+  addAlias("loose_isoTrks_pdgId"     , "prodisotrks_looseIsoTrks_pdgId");
+  addAlias("loose_isoTrks_charge"    , "prodisotrks_looseIsoTrks_charge");
+  addAlias("loose_isoTrks_mtw"       , "prodisotrks_looseIsoTrks_mtw");
+  addAlias("loose_isoTrks_dz"        , "prodisotrks_looseIsoTrks_dz");
+  addAlias("loose_isoTrks_iso"       , "prodisotrks_looseIsoTrks_iso");
+  addAlias("loose_isoTrks_pfActivity", "prodisotrks_looseIsoTrks_pfActivity");
   return true;
 }       // -----  end of function StopleAlias::MapIsoTrack  -----
 
@@ -272,3 +284,24 @@ bool StopleAlias::addAlias(const std::string &Sfrom, const std::string &Sto)
   AliasMap[Sto] =Sfrom;
   return true;
 }       // -----  end of function StopleAlias::addAlias  -----
+
+// ===  FUNCTION  ============================================================
+//         Name:  StopleAlias::MapSoftb
+//  Description:  
+// ===========================================================================
+bool StopleAlias::MapSoftb()
+{
+  MapVectorTLV("sv_sv", "svLVec");
+  MapVectorObj<float, double>("sv_sv_d3derr", "svD3Derr");
+  MapVectorObj<float, double>("sv_sv_d3d", "svD3D");
+  MapVectorObj<float, double>("sv_sv_dxy", "svDXY");
+  MapVectorObj<float, double>("sv_sv_ntracks", "svNTracks");
+  MapVectorObj<float, double>("sv_sv_costhetasvpv", "svCosThetaSVPS");
+
+  // Missing the below mapping
+  //std::vector<float, std::allocator<float> > sv_sv_mva
+  //std::vector<float, std::allocator<float> > sv_sv_chi2
+  //std::vector<float, std::allocator<float> > sv_sv_ndf
+  //std::vector<float, std::allocator<float> > sv_sv_dxyerr
+  return true;
+}       // -----  end of function StopleAlias::MapSoftb  -----
