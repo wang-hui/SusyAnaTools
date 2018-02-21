@@ -163,13 +163,13 @@ bool StopleAlias::MapGen()
 bool StopleAlias::MapIsoTrack()
 {
   MapVectorTLV("prodisotrks_looseIsoTrks", "loose_isoTrksLVec");
-  addAlias("loose_isoTrks_idx"       , "prodisotrks_looseIsoTrks_idx");
-  addAlias("loose_isoTrks_pdgId"     , "prodisotrks_looseIsoTrks_pdgId");
-  addAlias("loose_isoTrks_charge"    , "prodisotrks_looseIsoTrks_charge");
-  addAlias("loose_isoTrks_mtw"       , "prodisotrks_looseIsoTrks_mtw");
-  addAlias("loose_isoTrks_dz"        , "prodisotrks_looseIsoTrks_dz");
-  addAlias("loose_isoTrks_iso"       , "prodisotrks_looseIsoTrks_iso");
-  addAlias("loose_isoTrks_pfActivity", "prodisotrks_looseIsoTrks_pfActivity");
+  addAlias("prodisotrks_looseIsoTrks_idx"       , "loose_isoTrks_idx"       );
+  addAlias("prodisotrks_looseIsoTrks_pdgId"     , "loose_isoTrks_pdgId"     );
+  addAlias("prodisotrks_looseIsoTrks_charge"    , "loose_isoTrks_charge"    );
+  addAlias("prodisotrks_looseIsoTrks_mtw"       , "loose_isoTrks_mtw"       );
+  addAlias("prodisotrks_looseIsoTrks_dz"        , "loose_isoTrks_dz"        );
+  addAlias("prodisotrks_looseIsoTrks_iso"       , "loose_isoTrks_iso"       );
+  addAlias("prodisotrks_looseIsoTrks_pfActivity", "loose_isoTrks_pfActivity");
   return true;
 }       // -----  end of function StopleAlias::MapIsoTrack  -----
 
