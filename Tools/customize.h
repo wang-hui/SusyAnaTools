@@ -77,18 +77,18 @@ namespace AnaConsts{
    const double defaultHTcut = 300;
 
 //                                    minAbsEta, maxAbsEta, minPt, maxPt,   maxIso,  maxMtw
-   const IsoAccRec     muonsArr =    {   -1,       2.4,      10,     -1,       0.2,     -1  };
+   const IsoAccRec        muonsArr = {   -1,       2.4,      10,    -1,       0.2,     -1  };
    const IsoAccRec muonsMiniIsoArr = {   -1,       2.4,      5,     -1,       0.2,     -1  };
-   const IsoAccRec muonsTrigArr =    {   -1,       2.4,       5,     -1,       0.4,     -1  };
-//   const IsoAccRec   isoTrksArr =    {   -1,        -1,      10,     -1,       0.1,    100  };
-   const IsoAccRec   isoLepTrksArr = {   -1,       2.5,       5,     -1,       0.2,    100  };
-   const IsoAccRec   isoHadTrksArr = {   -1,       2.5,      10,     -1,       0.1,    100  };
-//   const IsoAccRec   isoTrksArr =    {   -1,        -1,     10,     -1,       0.1,    120  };
+   const IsoAccRec    muonsTrigArr = {   -1,       2.4,      5,     -1,       0.4,     -1  };
+// const IsoAccRec      isoTrksArr = {   -1,        -1,      10,    -1,       0.1,    100  };
+   const IsoAccRec   isoLepTrksArr = {   -1,       2.5,       5,    -1,       0.2,    100  };
+   const IsoAccRec   isoHadTrksArr = {   -1,       2.5,      10,    -1,       0.1,    100  };
+// const IsoAccRec      isoTrksArr = {   -1,        -1,      10,    -1,       0.1,    120  };
 
 //                                       minAbsEta, maxAbsEta, minPt, maxPt, maxIsoEB, maxIsoEE,  maxMtw
-   const ElecIsoAccRec     elesArr =    {   -1,       2.5,      10,     -1,  0.164369, 0.212604,    -1  };
-   const ElecIsoAccRec elesMiniIsoArr = {   -1,       2.5,      5,     -1,     0.10,     0.10,     -1  };
-   const ElecIsoAccRec  oldelesArr =    {   -1,       2.5,       5,     -1,     0.15,     0.15,     -1  };
+   const ElecIsoAccRec        elesArr = {   -1,       2.5,      10,     -1,  0.164369, 0.212604,    -1  };
+   const ElecIsoAccRec elesMiniIsoArr = {   -1,       2.5,       5,     -1,  0.10,     0.10,        -1  };
+   const ElecIsoAccRec     oldelesArr = {   -1,       2.5,       5,     -1,  0.15,     0.15,        -1  };
 
 //                                  minAbsEta, maxAbsEta, minPt, maxPt,   mindR,   maxdR
    const ActRec     muonsAct =    {   -1,       -1,        10,    -1,       -1,     1.0  };
@@ -108,8 +108,8 @@ namespace AnaConsts{
                                                   "met", "metphi", 
                                                   "tru_npv", "vtxSize",
                                                   "recoJetsBtag_0_LepCleaned", "jetsLVecLepCleaned",
-                          "recoJetschargedEmEnergyFraction", "recoJetsneutralEmEnergyFraction", "recoJetschargedHadronEnergyFraction", "recoJetsmuonEnergyFraction",
-//                                                  "looseJetID", "tightJetID", "looseJetID_NoLep", "tightJetID_NoLep", "CSCTightHaloFilter", "EcalDeadCellTriggerPrimitiveFilter", "HBHENoiseFilter", "HBHEIsoNoiseFilter",
+                                                  "recoJetschargedEmEnergyFraction", "recoJetsneutralEmEnergyFraction", "recoJetschargedHadronEnergyFraction", "recoJetsmuonEnergyFraction",
+//                                                "looseJetID", "tightJetID", "looseJetID_NoLep", "tightJetID_NoLep", "CSCTightHaloFilter", "EcalDeadCellTriggerPrimitiveFilter", "HBHENoiseFilter", "HBHEIsoNoiseFilter",
                                                   "looseJetID", "tightJetID", "looseJetID_NoLep", "tightJetID_NoLep", "EcalDeadCellTriggerPrimitiveFilter", "HBHENoiseFilter", "HBHEIsoNoiseFilter", "goodVerticesFilter", "eeBadScFilter", "eeBadScListFilter", "CSCTightHaloListFilter", "badResolutionTrackListFilter", "muonBadTrackListFilter",
                                                   "TriggerNames", "PassTrigger", "TriggerPrescales", 
                                                   "stored_weight",
