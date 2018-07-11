@@ -59,13 +59,13 @@ namespace AnaConsts{
    const int low_nTopCandSortedSel = 1, high_nTopCandSortedSel = -1;
    const double minJetPt = 30;
 //                               minAbsEta, maxAbsEta, minPt, maxPt
-   const AccRec      pt30Arr = {   -1,        -1,      30,    -1  };
+   const AccRec pt30Arr      = {   -1,        -1,      30,    -1  };
    const AccRec pt30Eta24Arr = {   -1,       2.4,      30,    -1  };
    const AccRec pt20Eta24Arr = {   -1,       2.4,      20,    -1  };
    const AccRec pt50Eta24Arr = {   -1,       2.4,      50,    -1  };
-   const AccRec      dphiArr = {   -1,       4.7,      20,    -1  };
-   const AccRec     dphiNArr = {   -1,       2.4,      30,    -1  };
-   const AccRec      bTagArr = {   -1,       2.4,      30,    -1  };
+   const AccRec dphiArr      = {   -1,       4.7,      20,    -1  };
+   const AccRec dphiNArr     = {   -1,       2.4,      30,    -1  };
+   const AccRec bTagArr      = {   -1,       2.4,      30,    -1  };
    const AccRec pt20Eta25Arr = {   -1,       2.5,      20,    -1  };
 
 //   const double cutCSVS = 0.814, cutCSVSold = 0.679; // for T5tttt signals, currently old b-tagging was used
@@ -77,22 +77,22 @@ namespace AnaConsts{
    const double defaultHTcut = 300;
 
 //                                    minAbsEta, maxAbsEta, minPt, maxPt,   maxIso,  maxMtw
-   const IsoAccRec        muonsArr = {   -1,       2.4,      10,    -1,       0.2,     -1  };
+   const IsoAccRec muonsArr        = {   -1,       2.4,      10,    -1,       0.2,     -1  };
    const IsoAccRec muonsMiniIsoArr = {   -1,       2.4,      5,     -1,       0.2,     -1  };
-   const IsoAccRec    muonsTrigArr = {   -1,       2.4,      5,     -1,       0.4,     -1  };
-// const IsoAccRec      isoTrksArr = {   -1,        -1,      10,    -1,       0.1,    100  };
-   const IsoAccRec   isoLepTrksArr = {   -1,       2.5,       5,    -1,       0.2,    100  };
-   const IsoAccRec   isoHadTrksArr = {   -1,       2.5,      10,    -1,       0.1,    100  };
-// const IsoAccRec      isoTrksArr = {   -1,        -1,      10,    -1,       0.1,    120  };
+   const IsoAccRec muonsTrigArr    = {   -1,       2.4,      5,     -1,       0.4,     -1  };
+// const IsoAccRec isoTrksArr      = {   -1,        -1,      10,    -1,       0.1,    100  };
+   const IsoAccRec isoLepTrksArr   = {   -1,       2.5,       5,    -1,       0.2,    100  };
+   const IsoAccRec isoHadTrksArr   = {   -1,       2.5,      10,    -1,       0.1,    100  };
+// const IsoAccRec isoTrksArr      = {   -1,        -1,      10,    -1,       0.1,    120  };
 
 //                                       minAbsEta, maxAbsEta, minPt, maxPt, maxIsoEB, maxIsoEE,  maxMtw
-   const ElecIsoAccRec        elesArr = {   -1,       2.5,      10,     -1,  0.164369, 0.212604,    -1  };
+   const ElecIsoAccRec elesArr        = {   -1,       2.5,      10,     -1,  0.164369, 0.212604,    -1  };
    const ElecIsoAccRec elesMiniIsoArr = {   -1,       2.5,       5,     -1,  0.10,     0.10,        -1  };
-   const ElecIsoAccRec     oldelesArr = {   -1,       2.5,       5,     -1,  0.15,     0.15,        -1  };
+   const ElecIsoAccRec oldelesArr     = {   -1,       2.5,       5,     -1,  0.15,     0.15,        -1  };
 
-//                                  minAbsEta, maxAbsEta, minPt, maxPt,   mindR,   maxdR
-   const ActRec     muonsAct =    {   -1,       -1,        10,    -1,       -1,     1.0  };
-   const ActRec      elesAct =    {   -1,       -1,        10,    -1,       -1,     1.0  };
+//                           minAbsEta, maxAbsEta, minPt, maxPt,   mindR,   maxdR
+   const ActRec muonsAct = {   -1,       -1,        10,    -1,       -1,     1.0  };
+   const ActRec elesAct  = {   -1,       -1,        10,    -1,       -1,     1.0  };
 
    const double  dPhi0_CUT = 0.5, dPhi1_CUT = 0.5, dPhi2_CUT = 0.3;
    const double  minDPhiN_CUT = 6;
