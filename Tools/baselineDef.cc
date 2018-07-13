@@ -147,13 +147,15 @@ void BaselineVessel::prepareTopTagger()
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ New TopTagger ~~~~~
     // top tagger
     //construct vector of constituents 
-    ttUtility::ConstAK4Inputs myConstAK4Inputs = ttUtility::ConstAK4Inputs(*jetsLVec_forTagger, *recoJetsBtag_forTagger, *qgLikelihood_forTagger);
-    ttUtility::ConstAK8Inputs myConstAK8Inputs = ttUtility::ConstAK8Inputs(
+    //ttUtility::ConstAK4Inputs myConstAK4Inputs = ttUtility::ConstAK4Inputs(*jetsLVec_forTagger, *recoJetsBtag_forTagger, *qgLikelihood_forTagger);
+    ttUtility::ConstAK4Inputs<float> myConstAK4Inputs(*jetsLVec_forTagger, *recoJetsBtag_forTagger, *qgLikelihood_forTagger);
+    //ttUtility::ConstAK8Inputs myConstAK8Inputs = ttUtility::ConstAK8Inputs(
+    ttUtility::ConstAK8Inputs<float> myConstAK8Inputs(
         tr->getVec<TLorentzVector>(UseLepCleanJet ? "prodJetsNoLep_puppiJetsLVec" : "puppiJetsLVec"), 
-        tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau1" : "puppitau1"),
-        tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau2" : "puppitau2"),
-        tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau3" : "puppitau3"),
-        tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppisoftDropMass" : "puppisoftDropMass"),
+        tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau1" : "puppitau1"),
+        tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau2" : "puppitau2"),
+        tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau3" : "puppitau3"),
+        tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppisoftDropMass" : "puppisoftDropMass"),
         tr->getVec<TLorentzVector>(UseLepCleanJet ? "prodJetsNoLep_puppiSubJetsLVec" : "puppiSubJetsLVec"));
     if (WMassCorFile != NULL)
     {
