@@ -44,8 +44,8 @@ private:
     //  container
     TLorentzVector metLVec; 
     std::vector<TLorentzVector> *jetsLVec_forTagger;
-    std::vector<double> *recoJetsBtag_forTagger;
-    std::vector<double> *qgLikelihood_forTagger;
+    std::vector<float> *recoJetsBtag_forTagger;
+    std::vector<float> *qgLikelihood_forTagger;
     std::vector<TLorentzVector> *vTops;
     std::map<int, std::vector<TLorentzVector> > *mTopJets;
     std::vector<unsigned> * vAK8Flag;

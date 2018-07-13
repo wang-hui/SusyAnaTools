@@ -231,7 +231,7 @@ namespace AnaFunctions
     return cntNIsoTrks;
   }
 
-  void prepareJetsForTagger(const std::vector<TLorentzVector> &inijetsLVec, const std::vector<double> &inirecoJetsBtag, std::vector<TLorentzVector> &jetsLVec_forTagger, std::vector<double> &recoJetsBtag_forTagger, const std::vector<double>& qgLikelihood, std::vector<double>& qgLikelihood_forTagger){
+  void prepareJetsForTagger(const std::vector<TLorentzVector> &inijetsLVec, const std::vector<float> &inirecoJetsBtag, std::vector<TLorentzVector> &jetsLVec_forTagger, std::vector<float> &recoJetsBtag_forTagger, const std::vector<float>& qgLikelihood, std::vector<float>& qgLikelihood_forTagger){
 
     jetsLVec_forTagger.clear(); recoJetsBtag_forTagger.clear();
 
