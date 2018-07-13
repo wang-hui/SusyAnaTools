@@ -123,12 +123,12 @@ void BaselineVessel::prepareTopTagger()
 {
 // Prepare jets and b-tag working points for top tagger
   jetsLVec_forTagger     = new std::vector<TLorentzVector>();
-  recoJetsBtag_forTagger = new std::vector<float>();
-  qgLikelihood_forTagger = new std::vector<float>();
-  std::vector<float> qgLikelihood;
+  recoJetsBtag_forTagger = new std::vector<double>();
+  qgLikelihood_forTagger = new std::vector<double>();
+  std::vector<double> qgLikelihood;
   try
   {
-    qgLikelihood = tr->getVec<float>(qgLikehoodLabel);
+    qgLikelihood = tr->getVec<double>(qgLikehoodLabel);
   }
   catch (const SATException& e)
   {
@@ -136,7 +136,7 @@ void BaselineVessel::prepareTopTagger()
     qgLikelihood.clear();
   }
     
-  AnaFunctions::prepareJetsForTagger(tr->getVec<TLorentzVector>(jetVecLabel), tr->getVec<float>(CSVVecLabel), 
+  AnaFunctions::prepareJetsForTagger(tr->getVec<TLorentzVector>(jetVecLabel), tr->getVec<double>(CSVVecLabel), 
       *jetsLVec_forTagger, *recoJetsBtag_forTagger, qgLikelihood, *qgLikelihood_forTagger);
 
   tr->registerDerivedVec("jetsLVec_forTagger" + firstSpec, jetsLVec_forTagger);
@@ -148,14 +148,14 @@ void BaselineVessel::prepareTopTagger()
     // top tagger
     //construct vector of constituents 
     //ttUtility::ConstAK4Inputs myConstAK4Inputs = ttUtility::ConstAK4Inputs(*jetsLVec_forTagger, *recoJetsBtag_forTagger, *qgLikelihood_forTagger);
-    ttUtility::ConstAK4Inputs<float> myConstAK4Inputs(*jetsLVec_forTagger, *recoJetsBtag_forTagger, *qgLikelihood_forTagger);
+    ttUtility::ConstAK4Inputs<double> myConstAK4Inputs(*jetsLVec_forTagger, *recoJetsBtag_forTagger, *qgLikelihood_forTagger);
     //ttUtility::ConstAK8Inputs myConstAK8Inputs = ttUtility::ConstAK8Inputs(
-    ttUtility::ConstAK8Inputs<float> myConstAK8Inputs(
+    ttUtility::ConstAK8Inputs<double> myConstAK8Inputs(
         tr->getVec<TLorentzVector>(UseLepCleanJet ? "prodJetsNoLep_puppiJetsLVec" : "puppiJetsLVec"), 
-        tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau1" : "puppitau1"),
-        tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau2" : "puppitau2"),
-        tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau3" : "puppitau3"),
-        tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppisoftDropMass" : "puppisoftDropMass"),
+        tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau1" : "puppitau1"),
+        tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau2" : "puppitau2"),
+        tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau3" : "puppitau3"),
+        tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppisoftDropMass" : "puppisoftDropMass"),
         tr->getVec<TLorentzVector>(UseLepCleanJet ? "prodJetsNoLep_puppiSubJetsLVec" : "puppiSubJetsLVec"));
     if (WMassCorFile != NULL)
     {
@@ -480,12 +480,12 @@ bool BaselineVessel::FlagAK8Jets()
 {
   // AK8 + Ak4 for W + jet
   //ttUtility::ConstAK8Inputs myConstAK8Inputs = ttUtility::ConstAK8Inputs(
-  ttUtility::ConstAK8Inputs<float> myConstAK8Inputs(
+  ttUtility::ConstAK8Inputs<double> myConstAK8Inputs(
       tr->getVec<TLorentzVector>(UseLepCleanJet ? "prodJetsNoLep_puppiJetsLVec" : "puppiJetsLVec"), 
-      tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau1" : "puppitau1"),
-      tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau2" : "puppitau2"),
-      tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau3" : "puppitau3"),
-      tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppisoftDropMass" : "puppisoftDropMass"),
+      tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau1" : "puppitau1"),
+      tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau2" : "puppitau2"),
+      tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau3" : "puppitau3"),
+      tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppisoftDropMass" : "puppisoftDropMass"),
       tr->getVec<TLorentzVector>(UseLepCleanJet ? "prodJetsNoLep_puppiSubJetsLVec" : "puppiSubJetsLVec"));
   if (WMassCorFile != NULL)
   {
@@ -683,12 +683,12 @@ bool BaselineVessel::GetTopCombs() const
 
   // AK8 + Ak4 for W + jet
   //ttUtility::ConstAK8Inputs myConstAK8Inputs = ttUtility::ConstAK8Inputs(
-  ttUtility::ConstAK8Inputs<float> myConstAK8Inputs(
+  ttUtility::ConstAK8Inputs<double> myConstAK8Inputs(
       tr->getVec<TLorentzVector>(UseLepCleanJet ? "prodJetsNoLep_puppiJetsLVec" : "puppiJetsLVec"), 
-      tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau1" : "puppitau1"),
-      tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau2" : "puppitau2"),
-      tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppitau3" : "puppitau3"),
-      tr->getVec<float>(UseLepCleanJet ? "prodJetsNoLep_puppisoftDropMass" : "puppisoftDropMass"),
+      tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau1" : "puppitau1"),
+      tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau2" : "puppitau2"),
+      tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppitau3" : "puppitau3"),
+      tr->getVec<double>(UseLepCleanJet ? "prodJetsNoLep_puppisoftDropMass" : "puppisoftDropMass"),
       tr->getVec<TLorentzVector>(UseLepCleanJet ? "prodJetsNoLep_puppiSubJetsLVec" : "puppiSubJetsLVec"));
   std::vector<Constituent> AK8constituents;
   myConstAK8Inputs.packageConstituents(AK8constituents);
