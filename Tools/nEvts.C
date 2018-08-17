@@ -80,6 +80,11 @@ int main(int argc, char *argv[])
             
             t->Draw("stored_weight>>h3", "stored_weight", "goff");
             std::cout << "Processing file(s): " << file.second.tag << "\t" << file.second.filePath + file.second.fileName << "\t" << "Neg weigths = " << int(h3->GetBinContent(1)) << ", Pos weights = " << int(h3->GetBinContent(2)) << std::endl;
+            // delete TH1* to avoid memory leaks / save memory / not crash / be safe
+            delete h3;
         }
+        // delete TChain* to avoid memory leaks / save memory / not crash / be safe
+        delete t;
     }   
 }
+
