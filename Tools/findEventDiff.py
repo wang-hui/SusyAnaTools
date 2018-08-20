@@ -1,6 +1,7 @@
 import re
 
-with open("samples.cc") as f1:
+#with open("samples.cc") as f1:
+with open("sampleSets.cfg") as f1:
     storedDS = {}
     for line in f1:
         if("lumi" in line and "addSample" in line): 
