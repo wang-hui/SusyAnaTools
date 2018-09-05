@@ -8,6 +8,7 @@
 # - output new samples config file with updated weights
 import argparse
 import re
+from shutil import copyfile
 
 # regex
 # regular expression to get sample name and positive/negative weights
@@ -35,8 +36,24 @@ def getNewSample(sample, nevents_file):
     # be careful: strip() removes spaces and endlines
     sample_list = list(x.strip() for x in sample.split(','))
     name = sample_list[0] 
-    old_neg_weights = sample_list[-2]
-    old_pos_weights = sample_list[-3]
+    #print "sample_list: {0}".format(sample_list)
+    # values are floats, but we want integers
+    try:
+        old_neg_weights = int(float(sample_list[-2]))
+    except:
+        print "ERROR: sample_list format is not correct; {0} is not a number".format(sample_list[-2])
+        print "ERROR: sample_list = {0}".format(sample_list)
+        print "Skipping sample_list"
+        newSample = ", ".join(sample_list) + "\n"
+        return newSample
+    try:
+        old_pos_weights = int(float(sample_list[-3]))
+    except:
+        print "ERROR: sample_list format is not correct; {0} is not a number".format(sample_list[-3])
+        print "ERROR: sample_list = {0}".format(sample_list)
+        print "Skipping sample_list"
+        newSample = ", ".join(sample_list) + "\n"
+        return newSample
     nevents = open(nevents_file, 'r')
     num_matches = 0
     message = ""
@@ -46,9 +63,11 @@ def getNewSample(sample, nevents_file):
             continue
         if name == match.group(2):
             num_matches += 1
-            new_neg_weights = int(match.group(3))
-            new_pos_weights = int(match.group(4))
+            # values are floats, but we want integers
+            new_neg_weights = int(float(match.group(3)))
+            new_pos_weights = int(float(match.group(4)))
             message = ""
+            # compare integers, not strings!
             if old_neg_weights == new_neg_weights and old_pos_weights == new_pos_weights:
                 message += " weights have not changed"
             else:
@@ -73,9 +92,9 @@ def main():
 
     # options
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("--samples_file", "-s", default="sampleSets.cfg",               help="file containing sample sets")
-    parser.add_argument("--nevents_file", "-e", default="nEvents.txt",                  help="file containing number of events with weights")
-    parser.add_argument("--output_file",  "-o", default="sampleCfg_v3/sampleSets.cfg",  help="output file with updated sample sets")
+    parser.add_argument("--samples_file", "-s", default="sampleSets.cfg",    help="file containing sample sets")
+    parser.add_argument("--nevents_file", "-e", default="nEvents.txt",       help="file containing number of events with weights")
+    parser.add_argument("--output_file",  "-o", default="sampleSets_v2.cfg", help="output file with updated sample sets")
     options = parser.parse_args()
     samples_file = options.samples_file
     nevents_file = options.nevents_file
@@ -84,6 +103,9 @@ def main():
     print "samples file: {0}".format(samples_file)
     print "nevents file: {0}".format(nevents_file)
     print "output file: {0}".format(output_file)
+
+    print "Copying {0} to sampleSets_v1.cfg".format(samples_file)
+    copyfile(samples_file, "sampleSets_v1.cfg")
 
     samples = open(samples_file, 'r')
     newSamples = open(output_file, 'w')
