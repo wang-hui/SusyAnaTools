@@ -38,21 +38,21 @@ def getNewSample(sample, nevents_file):
     name = sample_list[0] 
     #print "sample_list: {0}".format(sample_list)
     # values are floats, but we want integers
+    newSample = ", ".join(sample_list) + "\n"
+    if "Data" in sample or "data" in sample:
+        print "Skipping data sample: {0}".format(name)
+        return newSample
     try:
         old_neg_weights = int(float(sample_list[-2]))
     except:
         print "ERROR: sample_list format is not correct; {0} is not a number".format(sample_list[-2])
-        print "ERROR: sample_list = {0}".format(sample_list)
-        print "Skipping sample_list"
-        newSample = ", ".join(sample_list) + "\n"
+        print "ERROR: Skipping sample_list = {0}".format(sample_list)
         return newSample
     try:
         old_pos_weights = int(float(sample_list[-3]))
     except:
         print "ERROR: sample_list format is not correct; {0} is not a number".format(sample_list[-3])
-        print "ERROR: sample_list = {0}".format(sample_list)
-        print "Skipping sample_list"
-        newSample = ", ".join(sample_list) + "\n"
+        print "ERROR: Skipping sample_list = {0}".format(sample_list)
         return newSample
     nevents = open(nevents_file, 'r')
     num_matches = 0
@@ -69,13 +69,13 @@ def getNewSample(sample, nevents_file):
             message = ""
             # compare integers, not strings!
             if old_neg_weights == new_neg_weights and old_pos_weights == new_pos_weights:
-                message += " weights have not changed"
+                message += " old and new weights are the same"
             else:
-                message += " weights have changed"
+                message += " old and new weights are different"
             sample_list[-2] = str(new_neg_weights)
             sample_list[-3] = str(new_pos_weights)
             # print at the end
-            message = "old: ({0}, {1}) new: ({2}, {3}) --- {4}".format(old_pos_weights, old_neg_weights, new_pos_weights, new_neg_weights, message)
+            message = "old weights: ({0}, {1}) new weights: ({2}, {3}) --- {4}".format(old_pos_weights, old_neg_weights, new_pos_weights, new_neg_weights, message)
     print "{0} has {1} match(es) in nevents file: {2}".format(name, num_matches, message)
     if num_matches == 0:
         print "WARNING: no matches found; {0} has {1} matches".format(name, num_matches)
@@ -117,11 +117,11 @@ def main():
         # we remove these for our conditions, but not for our new file
         sample = sample.strip()
         #print "sample: {0}".format(sample)
-        # if line is empty, write original line to file
+        # if line is empty (after being stripped), write original line (with endline) to file
         if not sample:
             newSamples.write(newSample)
             continue
-        # if first non-space character is # (comment), write original line to file
+        # if first non-space character is # (comment), write original line (with endline) to file
         if sample[0] == "#":
             newSamples.write(newSample)
             continue
