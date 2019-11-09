@@ -1,0 +1,48 @@
+Combination of comb__ch69.txt  comb_ttbarW_eleCS__ch69.txt  comb_ttbarW_muCS__ch69.txt
+imax 3 number of bins
+jmax 7 number of processes minus 1
+kmax 31 number of nuisance parameters
+----------------------------------------------------------------------------------------------------------------------------------
+shapes *    ch1  FAKE
+shapes *    ch2  FAKE
+shapes *    ch3  FAKE
+----------------------------------------------------------------------------------------------------------------------------------
+bin          ch1            ch2            ch3          
+observation  34.6877        10             15           
+----------------------------------------------------------------------------------------------------------------------------------
+bin                                            ch1            ch1            ch1            ch1            ch1            ch1            ch2            ch2            ch3            ch3          
+process                                        signal         ttz            zinv           rare           ttbarW         qcd            signal         ttbarW_eleCS   signal         ttbarW_muCS  
+process                                        0              1              2              3              4              5              0              6              0              7            
+rate                                           1.13408        0.49523        21.0752        0.91186        10.2271        1.97837        0.02037        10.90948       0.01555        15.14901     
+----------------------------------------------------------------------------------------------------------------------------------
+qcd_stat_unc_chn69      gmN  235               -              -              -              -              -              0.00842        -              -              -              -            
+qcd_syst_unc_all        lnN                    -              -              -              -              -              0.002/2.5      -              -              -              -            
+rare_stat_unc_chn69     gmN  10                -              -              -              0.09119        -              -              -              -              -              -            
+rare_syst_unc           lnN                    -              -              -              0.9/1.1        -              -              -              -              -              -            
+signal_cs_event_chn69   gmN  981               0.00116        -              -              -              -              -              -              -              -              -            
+signal_syst_TopReco     lnN                    0.95/1.05      -              -              -              -              -              -              -              -              -            
+signal_syst_TopSF       lnN                    0.9/1.1        -              -              -              -              -              -              -              -              -            
+signal_syst_bTagSF      lnN                    0.9/1.1        -              -              -              -              -              -              -              -              -            
+signal_syst_isrUnc      lnN                    0.8/1.2        -              -              -              -              -              -              -              -              -            
+signal_syst_jetJEC      lnN                    0.85/1.15      -              -              -              -              -              -              -              -              -            
+signal_syst_lepVetoUnc   lnN                   0.97/1.03      -              -              -              -              -              -              -              -              -            
+signal_syst_lumi_unc    lnN                    0.975/1.025    -              -              -              -              -              -              -              -              -            
+signal_syst_scaleUnc    lnN                    0.99/1.01      -              -              -              -              -              -              -              -              -            
+signal_syst_trigUnc     lnN                    0.99/1.01      -              -              -              -              -              -              -              -              -            
+ttbarW_CS_ch69          lnU                    -              -              -              -              10.0           -              -              10.0           -              10.0         
+ttbarW_syst_unc_ISR     lnN                    -              -              -              -              0.95/1.05      -              -              -              -              -            
+ttbarW_syst_unc_JEC     lnN                    -              -              -              -              0.8/1.2        -              -              -              -              -            
+ttbarW_syst_unc_SF      lnN                    -              -              -              -              0.8/1.2        -              -              -              -              -            
+ttbarW_syst_unc_TF_stat   lnN                  -              -              -              -              0.8941/1.1059  -              -              -              -              -            
+ttbarW_syst_unc_btag    lnN                    -              -              -              -              0.99/1.01      -              -              -              -              -            
+ttbarW_syst_unc_pdf     lnN                    -              -              -              -              0.9/1.1        -              -              -              -              -            
+ttz_stat_unc_chn69      gmN  169               -              0.00293        -              -              -              -              -              -              -              -            
+ttz_syst_unc            lnN                    -              0.7/1.3        -              -              -              -              -              -              -              -            
+zinv_stat_unc_chn69     gmN  589               -              -              0.03578        -              -              -              -              -              -              -            
+zinv_syst_unc_btag      lnN                    -              -              0.9/1.1        -              -              -              -              -              -              -            
+zinv_syst_unc_jec       lnN                    -              -              0.8/1.2        -              -              -              -              -              -              -            
+zinv_syst_unc_norm      lnN                    -              -              0.924/1.076    -              -              -              -              -              -              -            
+zinv_syst_unc_pdf       lnN                    -              -              0.8/1.2        -              -              -              -              -              -              -            
+zinv_syst_unc_shape_central   lnN              -              -              0.8/1.2        -              -              -              -              -              -              -            
+zinv_syst_unc_shape_stat   lnN                 -              -              0.8/1.2        -              -              -              -              -              -              -            
+zinv_syst_unc_trig      lnN                    -              -              0.95/1.05      -              -              -              -              -              -              -            
